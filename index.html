@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>LightSwitchField</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./dist/LightSwitchField.css">
+    </head>
+    <body>
+        <form id="app" class="container">
+            <h1 class="mb-5">light-switch-field</h1>
+            
+            <light-switch-field v-model="value" :help-text="`Current Value: ${value}`"></light-switch-field>
+
+            <hr>
+
+            <h3>Sizes</h3>
+
+            <span>Extra Small (xs)</span>
+            <light-switch-field v-model="value" size="xs"></light-switch-field>
+
+            <span>Small (sm)</span>
+            <light-switch-field v-model="value" size="sm"></light-switch-field>
+
+            <span>Medium (md)</span>
+            <light-switch-field v-model="value" size="md"></light-switch-field>
+
+            <span>Large (lg)</span>
+            <light-switch-field v-model="value" size="lg"></light-switch-field>
+
+            <span>Extra Large (xl)</span>
+            <light-switch-field v-model="value" size="xl"></light-switch-field>
+        </form>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+        <script type="text/javascript" src="./dist/LightSwitchField.umd.js"></script>
+        <script type="text/javascript">
+            const vue = new Vue({
+                el: '#app',
+                components: {
+                    LightSwitchField
+                },
+                data() {
+                    return {
+                        value: null
+                    };
+                }
+            });
+        </script>
+    </body>
+</html>
