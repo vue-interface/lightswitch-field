@@ -1,4 +1,4 @@
-# CheckboxField
+# LightSwitchField
 
 [[toc]]
 
@@ -14,4 +14,4 @@ Yarn
 
 CDN
 
-    https://cdn.jsdelivr.net/npm/<%= pgk.name %>@<%= pkg.version %>/dist/CheckboxField.min.js
+    https://cdn.jsdelivr.net/npm/<%= pgk.name %>@<%= pkg.version %>/dist/LightSwitchField.min.js
