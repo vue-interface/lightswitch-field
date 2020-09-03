@@ -313,8 +313,5 @@ $light-switch-label-height: $light-switch-handle-height;
             //border-radius: 0 $light-switch-handle-width $light-switch-handle-width 0;
         }
     }
-
-
 }
-
 </style>
