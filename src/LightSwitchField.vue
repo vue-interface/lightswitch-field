@@ -1,7 +1,7 @@
 <template>
     <div :class="formGroupClasses">
         <slot name="label">
-            <label :for="$attrs.id || hash" :class="{[computedLabelClass]: true, [labelClass]: true}">
+            <label v-if="label" :for="$attrs.id" :class="{[labelClass]: !!labelClass}">
                 <slot>{{ label }}</slot>
             </label>
         </slot>
@@ -210,6 +210,12 @@ $light-switch-label-height: $light-switch-handle-height;
             height: $label-height;
         }
     }
+}
+
+.light-switch-field {
+
+    display: flex;
+    align-items: center;
 }
 
 .light-switch {
