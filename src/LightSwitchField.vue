@@ -22,17 +22,15 @@
 
         <slot name="feedback">
             <div 
-                v-if="validFeedback"
-                class="valid-feedback"
-                valid>
-                {{ validFeedback }}
-            </div>
-            <div 
-                v-else-if="invalidFeedback"
+                v-if="invalidFeedback"
                 class="invalid-feedback"
-                invalid>
-                {{ invalidFeedback }}
-            </div>
+                invalid
+                v-html="invalidFeedback" />
+            <div 
+                v-else-if="validFeedback"
+                class="valid-feedback"
+                valid
+                v-html="validFeedback" />
         </slot>
 
         <slot name="help">

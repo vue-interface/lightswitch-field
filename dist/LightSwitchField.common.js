@@ -2036,14 +2036,14 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/css/LightSwitchField.css
 var LightSwitchField = __webpack_require__("bb61");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4733fcb3-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LightSwitchField.vue?vue&type=template&id=7a890c5b&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e56b9288-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LightSwitchField.vue?vue&type=template&id=56cdc27a&
 var render = function () {
 var _obj;
-var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.formGroupClasses},[_vm._t("label",[(_vm.label)?_c('label',{class:( _obj = {}, _obj[_vm.labelClass] = !!_vm.labelClass, _obj ),attrs:{"for":_vm.$attrs.id}},[_vm._t("default",[_vm._v(_vm._s(_vm.label))])],2):_vm._e()]),_c('div',{class:_vm.controlClasses,attrs:{"tabindex":"0"},on:{"click":function($event){return _vm.toggle()},"keyup":[function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==32){ return null; }return _vm.toggle()},function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==37){ return null; }return _vm.toggle(_vm.offValue)},function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==39){ return null; }return _vm.toggle(_vm.onValue)}]}},[_c('div',{staticClass:"light-switch-handle"}),_vm._m(0)]),_vm._t("feedback",[(_vm.validFeedback)?_c('div',{staticClass:"valid-feedback",attrs:{"valid":""}},[_vm._v(" "+_vm._s(_vm.validFeedback)+" ")]):(_vm.invalidFeedback)?_c('div',{staticClass:"invalid-feedback",attrs:{"invalid":""}},[_vm._v(" "+_vm._s(_vm.invalidFeedback)+" ")]):_vm._e()]),_vm._t("help",[(_vm.helpText)?_c('small',{ref:"help"},[_vm._v(" "+_vm._s(_vm.helpText)+" ")]):_vm._e()])],2)}
+var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.formGroupClasses},[_vm._t("label",[(_vm.label)?_c('label',{class:( _obj = {}, _obj[_vm.labelClass] = !!_vm.labelClass, _obj ),attrs:{"for":_vm.$attrs.id}},[_vm._t("default",[_vm._v(_vm._s(_vm.label))])],2):_vm._e()]),_c('div',{class:_vm.controlClasses,attrs:{"tabindex":"0"},on:{"click":function($event){return _vm.toggle()},"keyup":[function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==32){ return null; }return _vm.toggle()},function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==37){ return null; }return _vm.toggle(_vm.offValue)},function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==39){ return null; }return _vm.toggle(_vm.onValue)}]}},[_c('div',{staticClass:"light-switch-handle"}),_vm._m(0)]),_vm._t("feedback",[(_vm.invalidFeedback)?_c('div',{staticClass:"invalid-feedback",attrs:{"invalid":""},domProps:{"innerHTML":_vm._s(_vm.invalidFeedback)}}):(_vm.validFeedback)?_c('div',{staticClass:"valid-feedback",attrs:{"valid":""},domProps:{"innerHTML":_vm._s(_vm.validFeedback)}}):_vm._e()]),_vm._t("help",[(_vm.helpText)?_c('small',{ref:"help"},[_vm._v(" "+_vm._s(_vm.helpText)+" ")]):_vm._e()])],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"light-switch-container"},[_c('div',{staticClass:"light-switch-label on-value"}),_c('div',{staticClass:"light-switch-label off-value"})])}]
 
 
-// CONCATENATED MODULE: ./src/LightSwitchField.vue?vue&type=template&id=7a890c5b&
+// CONCATENATED MODULE: ./src/LightSwitchField.vue?vue&type=template&id=56cdc27a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.join.js
 var es_array_join = __webpack_require__("a15b");
@@ -2076,6 +2076,322 @@ function camelCase(string) {
     return string.charAt(0).toLowerCase() + string.substring(1);
 }
 
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/isObject.js
+function isObject(subject) {
+    return (!!subject) && (subject.constructor === Object);
+};
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/now.js
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+    return Date.now();
+};
+
+/* harmony default export */ var src_now = (now);
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/isSymbol.js
+function isSymbol(value) {
+    return typeof value === 'symbol';
+}
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/toNumber.js
+
+
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+    if(typeof value == 'number') {
+        return value;
+    }
+    if(isSymbol(value)) {
+        return NAN;
+    }
+    if(isObject(value)) {
+        var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+        value = isObject(other) ? (other + '') : other;
+    }
+    if(typeof value != 'string') {
+        return value === 0 ? value : +value;
+    }
+    value = value.replace(reTrim, '');
+    var isBinary = reIsBinary.test(value);
+    return (isBinary || reIsOctal.test(value))
+        ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+        : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+/* harmony default export */ var src_toNumber = (toNumber);
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/debounce.js
+
+
+
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+    var lastArgs,
+        lastThis,
+        maxWait,
+        result,
+        timerId,
+        lastCallTime,
+        lastInvokeTime = 0,
+        leading = false,
+        maxing = false,
+        trailing = true;
+
+    if(typeof func != 'function') {
+        throw new TypeError(FUNC_ERROR_TEXT);
+    }
+    wait = src_toNumber(wait) || 0;
+    if(isObject(options)) {
+        leading = !!options.leading;
+        maxing = 'maxWait' in options;
+        maxWait = maxing ? nativeMax(src_toNumber(options.maxWait) || 0, wait) : maxWait;
+        trailing = 'trailing' in options ? !!options.trailing : trailing;
+    }
+
+    function invokeFunc(time) {
+        var args = lastArgs,
+            thisArg = lastThis;
+
+        lastArgs = lastThis = undefined;
+        lastInvokeTime = time;
+        result = func.apply(thisArg, args);
+        return result;
+    }
+
+    function leadingEdge(time) {
+        // Reset any `maxWait` timer.
+        lastInvokeTime = time;
+        // Start the timer for the trailing edge.
+        timerId = setTimeout(timerExpired, wait);
+        // Invoke the leading edge.
+        return leading ? invokeFunc(time) : result;
+    }
+
+    function remainingWait(time) {
+        var timeSinceLastCall = time - lastCallTime,
+            timeSinceLastInvoke = time - lastInvokeTime,
+            timeWaiting = wait - timeSinceLastCall;
+
+        return maxing
+            ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
+            : timeWaiting;
+    }
+
+    function shouldInvoke(time) {
+        var timeSinceLastCall = time - lastCallTime,
+            timeSinceLastInvoke = time - lastInvokeTime;
+
+        // Either this is the first call, activity has stopped and we're at the
+        // trailing edge, the system time has gone backwards and we're treating
+        // it as the trailing edge, or we've hit the `maxWait` limit.
+        return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+            (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+    }
+
+    function timerExpired() {
+        var time = src_now();
+        if(shouldInvoke(time)) {
+            return trailingEdge(time);
+        }
+        // Restart the timer.
+        timerId = setTimeout(timerExpired, remainingWait(time));
+    }
+
+    function trailingEdge(time) {
+        timerId = undefined;
+
+        // Only invoke if we have `lastArgs` which means `func` has been
+        // debounced at least once.
+        if(trailing && lastArgs) {
+            return invokeFunc(time);
+        }
+        lastArgs = lastThis = undefined;
+        return result;
+    }
+
+    function cancel() {
+        if(timerId !== undefined) {
+            clearTimeout(timerId);
+        }
+        lastInvokeTime = 0;
+        lastArgs = lastCallTime = lastThis = timerId = undefined;
+    }
+
+    function flush() {
+        return timerId === undefined ? result : trailingEdge(src_now());
+    }
+
+    function debounced() {
+        var time = src_now(),
+            isInvoking = shouldInvoke(time);
+
+        lastArgs = arguments;
+        lastThis = this;
+        lastCallTime = time;
+
+        if(isInvoking) {
+            if(timerId === undefined) {
+                return leadingEdge(lastCallTime);
+            }
+            if(maxing) {
+                // Handle invocations in a tight loop.
+                timerId = setTimeout(timerExpired, wait);
+                return invokeFunc(lastCallTime);
+            }
+        }
+        if(timerId === undefined) {
+            timerId = setTimeout(timerExpired, wait);
+        }
+        return result;
+    }
+    debounced.cancel = cancel;
+    debounced.flush = flush;
+    return debounced;
+}
+
+/* harmony default export */ var src_debounce = (debounce);
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/deepExtend.js
+
+
+/**
+ * Deep merge two objects.
+ * @param target
+ * @param ...sources
+*/
+function deepExtend(target, ...sources) {
+    if(!sources.length) return target;
+
+    const source = sources.shift();
+
+    if(isObject(target) && isObject(source)) {
+        for(const key in source) {
+            if(isObject(source[key])) {
+                if(!target[key]) Object.assign(target, { [key]: {} });
+                deepExtend(target[key], source[key]);
+            }
+            else {
+                Object.assign(target, { [key]: source[key] });
+            }
+        }
+    }
+
+    return deepExtend(target, ...sources);
+}
+
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/first.js
 function first(array) {
     return (array && array.length) ? array[0] : undefined;
@@ -2086,10 +2402,6 @@ function isArray(value) {
     return Array.isArray(value);
 }
 
-// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/isObject.js
-function isObject(subject) {
-    return (!!subject) && (subject.constructor === Object);
-};
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/matches.js
 
 
@@ -2194,7 +2506,7 @@ function isNumeric(value) {
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/key.js
 
 
-function key(value) {
+function key_key(value) {
     return isNumeric(value) ? parseFloat(value) : value;
 }
 
@@ -2205,7 +2517,7 @@ function key(value) {
 function findIndex(subject, value) {
     for(const i in subject) {
         if(predicate(value)(subject[i])) {
-            return key(i);
+            return key_key(i);
         }
     }
 
@@ -2390,101 +2702,20 @@ function transition(el, defaultValue) {
 
 
 
-// CONCATENATED MODULE: ./node_modules/lodash-es/isObject.js
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-function isObject_isObject(value) {
-  var type = typeof value;
-  return value != null && (type == 'object' || type == 'function');
-}
-
-/* harmony default export */ var lodash_es_isObject = (isObject_isObject);
-
-// CONCATENATED MODULE: ./node_modules/@vue-interface/merge-classes/src/MergeClasses.js
 
 
-/* harmony default export */ var MergeClasses = ({
 
-    methods: {
 
-        mergeClasses(...args) {
-            return args.reduce((carry, arg) => {
-                if(lodash_es_isObject(arg)) {
-                    Object.assign(carry, arg);
-                }
-                else if(Array.isArray(arg)) {
-                    carry = carry.concat(arg);
-                }
-                else if(arg) {
-                    carry[arg] = true;
-                }
-
-                return carry;
-            }, {});
-        }
-
-    }
-
-});
-
-// CONCATENATED MODULE: ./node_modules/@vue-interface/merge-classes/index.js
-
-/* harmony default export */ var merge_classes = (MergeClasses);
 
 // CONCATENATED MODULE: ./node_modules/@vue-interface/form-control/src/FormControl.js
 
 
-
-const EMPTY_CLASS = 'is-empty';
-const FOCUS_CLASS = 'has-focus';
-const CHANGED_CLASS = 'has-changed';
 const CUSTOM_PREFIX = 'custom';
-
-function addClass(el, vnode, css) {
-    vnode.context.$el.classList.add(css);
-}
-
-function removeClass(el, vnode, css) {
-    vnode.context.$el.classList.remove(css);
-}
-
-function addEmptyClass(el, vnode) {
-    if(!el.value || (el.tagName === 'SELECT' && el.selectedIndex === -1)) {
-        addClass(el, vnode, EMPTY_CLASS);
-    }
-}
 
 /* harmony default export */ var FormControl = ({
 
     inheritAttrs: false,
 
-    mixins: [
-        merge_classes
-    ],
-    
     props: {
 
         /**
@@ -2598,11 +2829,21 @@ function addEmptyClass(el, vnode) {
         hideLabel: Boolean,
 
         /**
-         * The icon that should be used in the field.
+         * The activity indicator type.
          *
-         * @param {Array|String}
+         * @param {String}
          */
-        icon: [Array, String],
+        indicator: {
+            type: String,
+            default: 'spinner'
+        },
+
+        /**
+         * The activity indicator size.
+         *
+         * @param {String}
+         */
+        indicatorSize: String,
 
         /**
          * Display the form field inline
@@ -2633,14 +2874,21 @@ function addEmptyClass(el, vnode) {
         labelClass: [Object, String],
 
         /**
-         * Should the input look like a pill.
+         * Should the control look like a pill.
          *
-         * @param {String}
+         * @param {Boolean}
          */
         pill: Boolean,
+
+        /**
+         * Should the control look like plaintext.
+         *
+         * @param {Boolean}
+         */
+        plaintext: Boolean,
         
         /**
-         * Adds a shadow class to the form input.
+         * Adds a shadow class to the control.
          *
          * @param {String|Boolean}
          */
@@ -2693,45 +2941,34 @@ function addEmptyClass(el, vnode) {
     directives: {
         bindEvents: {
             bind(el, binding, vnode) {
-                function changedValue(el, value) {
-                    addClass(el, vnode, CHANGED_CLASS);
-
-                    if(!!el.value || (el.selectedIndex && el.selectedIndex > -1)) {
-                        removeClass(el, vnode, EMPTY_CLASS);
-                    }
-                    else if(!el.classList.contains(CHANGED_CLASS)) {
-                        addClass(el, vnode, EMPTY_CLASS);
-                    }
+                function onInput() {
+                    vnode.context.hasChanged = true;
+                    vnode.context.isEmpty = !el.value;
 
                     if(el.tagName === 'SELECT' && el.querySelector('[value=""]')) {
-                        el.querySelector('[value=""]').selected = !value;
+                        el.querySelector('[value=""]').selected = !el.value;
                     }
                 }
 
-                vnode.context.$watch('value', (value) => {
-                    changedValue(vnode.context.$el, value);
-                });
+                el.addEventListener('input', onInput);
+                el.addEventListener('change', onInput);
 
-                el.addEventListener('blur', event => {
-                    if(el.classList.contains(EMPTY_CLASS)) {
-                        removeClass(el, vnode, CHANGED_CLASS);
-                    }
-
-                    removeClass(el, vnode, FOCUS_CLASS);
-                });
-             
-                el.addEventListener('input', event => {
-                    changedValue(event.target, event.target.value);
-                });
-                
-                el.addEventListener('change', event => {
-                    changedValue(event.target, event.target.value);
+                el.addEventListener('focus', () => {
+                    vnode.context.hasFocus = true;
                 });
 
                 // Add/remove the has-focus class from the form control
-                el.addEventListener('focus', event => {
-                    addClass(el, vnode, FOCUS_CLASS);
+                el.addEventListener('blur', () => {
+                    vnode.context.hasFocus = false;
                 });
+
+                // Set the data-selected-index attribute if necessary.
+                if(el.selectedIndex >= 0) {
+                    el.setAttribute('data-selected-index', el.selectedIndex);
+                }
+
+                vnode.context.$watch('value', onInput);
+                vnode.context.isEmpty = !el.value;
 
                 // Bubble the native events up to the vue component.
                 vnode.context.bindEvents.forEach(name => {
@@ -2739,20 +2976,6 @@ function addEmptyClass(el, vnode) {
                         vnode.context.$emit(name, event);
                     });
                 });
-
-                if(el.selectedIndex >= 0) {
-                    el.setAttribute('data-selected-index', el.selectedIndex);
-                }
-            },
-            inserted(el, binding, vnode) {
-                addEmptyClass(el, vnode);
-
-                if(typeof el.selectedIndex === 'number' && el.selectedIndex > -1) {
-                    addClass(el, vnode, CHANGED_CLASS);
-                }
-            },
-            update(el, binding, vnode) {
-                addEmptyClass(el, vnode);
             }
         }
     },
@@ -2811,9 +3034,7 @@ function addEmptyClass(el, vnode) {
         },
 
         controlClass() {
-            return this.custom ? this.customControlClass : (
-                this.defaultControlClass + (this.plaintext ? '-plaintext' : '')
-            );
+            return this.custom ? this.customControlClass : this.defaultControlClass;
         },
 
         controlSizeClass() {
@@ -2824,29 +3045,39 @@ function addEmptyClass(el, vnode) {
             return 'custom-control';
         },
 
+        fileControlClass() {
+            return 'form-control-file';
+        },
+
         formGroupClasses() {
             const name = prefix_prefix(kebabCase(this.$options.name), this.custom ? CUSTOM_PREFIX : '');
 
-            return this.mergeClasses(name, prefix_prefix(this.size, name), {
+            return {
+                [name]: true,
+                [prefix_prefix(this.size, name)]: !!this.size,
                 'form-group': this.group,
                 'has-activity': this.activity,
+                'has-changed': this.hasChanged,
+                'has-focus': this.hasFocus,
+                'is-empty': this.isEmpty,
+                'is-invalid': !!(this.invalid || this.invalidFeedback),
                 'is-valid': !!(this.valid || this.validFeedback),
-                'is-invalid': !!(this.invalid || this.invalidFeedback)
-            }, this.shadowClassName);
+            };
         },
 
         controlClasses() {
-            return this.mergeClasses(
-                this.icon ? 'form-control-icon' : null,
-                this.controlClass,
-                this.colorableClasses,
-                this.controlSizeClass,
-                this.pill ? 'rounded rounded-pill' : null,
-                (this.spacing || ''),
-                ((this.valid || this.validFeedback) ? 'is-valid' : ''),
-                ((this.invalid || this.invalidFeedback) ? 'is-invalid' : ''),
-                this.shadowClassName
-            );
+            return {
+                [this.controlClass]: this.$attrs.type !== 'file',
+                [this.controlSizeClass]: this.$attrs.type !== 'file',
+                [this.fileControlClass]: this.$attrs.type === 'file',
+                'form-control-icon': !!this.$slots.icon,
+                'is-valid': !!(this.valid || this.validFeedback),
+                'is-invalid': !!(this.invalid || this.invalidFeedback),
+                [this.pillClasses]: this.pill,
+                [this.plaintextClass]: this.plaintext,
+                [this.spacing]: !!this.spacing,
+                [this.shadowableClassName]: !!this.shadow
+            };
         },
 
         hasDefaultSlot() {
@@ -2865,12 +3096,12 @@ function addEmptyClass(el, vnode) {
             }).join('<br>') : errors;
         },
 
-        shadowClassName() {
-            if(!this.shadow) {
-                return;
-            }
+        pillClasses() {
+            return 'rounded rounded-pill';
+        },
 
-            return this.shadow === true ? 'shadow' : `shadow-${this.shadow}`;
+        plaintextClass() {
+            return 'form-control-plaintext';
         },
 
         validFeedback() {
@@ -2887,7 +3118,10 @@ function addEmptyClass(el, vnode) {
 
     data() {
         return {
-            currentValue: this.value || this.defaultValue
+            currentValue: this.value || this.defaultValue,
+            hasChanged: false,
+            hasFocus: false,
+            isEmpty: false,
         };
     }
 
@@ -2905,8 +3139,6 @@ function addEmptyClass(el, vnode) {
 
 
 
-//
-//
 //
 //
 //
