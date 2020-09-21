@@ -1,12 +1,13 @@
 <template>
     <div :class="formGroupClasses">
         <slot name="label">
-            <label v-if="label" :for="$attrs.id" :class="{[labelClass]: !!labelClass}">
+            <label v-if="label" :for="$attrs.id" :class="{[labelClass]: !!labelClass}" @click="toggle()">
                 <slot>{{ label }}</slot>
             </label>
         </slot>
 
         <div
+            ref="input"
             :class="controlClasses"
             tabindex="0"
             @click="toggle()"
@@ -148,7 +149,7 @@ export default {
 
             throw new Error(`"${unit[0]}" is not a valid unit of measure. Unit must be "s" (seconds) or "ms" (milliseconds).`);
         },
-
+        
         toggle(value) {
             this.$emit('input', !isUndefined(value) ? value : (this.isActive ? this.offValue : this.onValue));
         }
@@ -211,9 +212,15 @@ $light-switch-label-height: $light-switch-handle-height;
 }
 
 .light-switch-field {
-
     display: flex;
     align-items: center;
+    align-items: center;
+
+    > label {
+        margin: 0;
+        margin-left: 1em;
+        order: 2;
+    }
 }
 
 .light-switch {
@@ -238,6 +245,7 @@ $light-switch-label-height: $light-switch-handle-height;
 
     @include form-validation-state("valid", $form-feedback-valid-color, 'none');
     @include form-validation-state("invalid", $form-feedback-invalid-color, 'none');
+    
 
     &.is-invalid {
         border: 1px solid $form-feedback-invalid-color;

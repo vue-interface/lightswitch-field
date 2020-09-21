@@ -2024,9 +2024,9 @@ if (typeof window !== 'undefined') {
     }
   }
 
-  var src = currentScript && currentScript.src.match(/(.+\/)[^/]+\.js(\?.*)?$/)
-  if (src) {
-    __webpack_require__.p = src[1] // eslint-disable-line
+  var setPublicPath_src = currentScript && currentScript.src.match(/(.+\/)[^/]+\.js(\?.*)?$/)
+  if (setPublicPath_src) {
+    __webpack_require__.p = setPublicPath_src[1] // eslint-disable-line
   }
 }
 
@@ -2036,14 +2036,14 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/css/LightSwitchField.css
 var LightSwitchField = __webpack_require__("bb61");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e56b9288-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LightSwitchField.vue?vue&type=template&id=56cdc27a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f59b982c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/LightSwitchField.vue?vue&type=template&id=34bf4d2a&
 var render = function () {
 var _obj;
-var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.formGroupClasses},[_vm._t("label",[(_vm.label)?_c('label',{class:( _obj = {}, _obj[_vm.labelClass] = !!_vm.labelClass, _obj ),attrs:{"for":_vm.$attrs.id}},[_vm._t("default",[_vm._v(_vm._s(_vm.label))])],2):_vm._e()]),_c('div',{class:_vm.controlClasses,attrs:{"tabindex":"0"},on:{"click":function($event){return _vm.toggle()},"keyup":[function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==32){ return null; }return _vm.toggle()},function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==37){ return null; }return _vm.toggle(_vm.offValue)},function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==39){ return null; }return _vm.toggle(_vm.onValue)}]}},[_c('div',{staticClass:"light-switch-handle"}),_vm._m(0)]),_vm._t("feedback",[(_vm.invalidFeedback)?_c('div',{staticClass:"invalid-feedback",attrs:{"invalid":""},domProps:{"innerHTML":_vm._s(_vm.invalidFeedback)}}):(_vm.validFeedback)?_c('div',{staticClass:"valid-feedback",attrs:{"valid":""},domProps:{"innerHTML":_vm._s(_vm.validFeedback)}}):_vm._e()]),_vm._t("help",[(_vm.helpText)?_c('small',{ref:"help"},[_vm._v(" "+_vm._s(_vm.helpText)+" ")]):_vm._e()])],2)}
+var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.formGroupClasses},[_vm._t("label",[(_vm.label)?_c('label',{class:( _obj = {}, _obj[_vm.labelClass] = !!_vm.labelClass, _obj ),attrs:{"for":_vm.$attrs.id},on:{"click":function($event){return _vm.toggle()}}},[_vm._t("default",[_vm._v(_vm._s(_vm.label))])],2):_vm._e()]),_c('div',{ref:"input",class:_vm.controlClasses,attrs:{"tabindex":"0"},on:{"click":function($event){return _vm.toggle()},"keyup":[function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==32){ return null; }return _vm.toggle()},function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==37){ return null; }return _vm.toggle(_vm.offValue)},function($event){if(!$event.type.indexOf('key')&&$event.keyCode!==39){ return null; }return _vm.toggle(_vm.onValue)}]}},[_c('div',{staticClass:"light-switch-handle"}),_vm._m(0)]),_vm._t("feedback",[(_vm.invalidFeedback)?_c('div',{staticClass:"invalid-feedback",attrs:{"invalid":""},domProps:{"innerHTML":_vm._s(_vm.invalidFeedback)}}):(_vm.validFeedback)?_c('div',{staticClass:"valid-feedback",attrs:{"valid":""},domProps:{"innerHTML":_vm._s(_vm.validFeedback)}}):_vm._e()]),_vm._t("help",[(_vm.helpText)?_c('small',{ref:"help"},[_vm._v(" "+_vm._s(_vm.helpText)+" ")]):_vm._e()])],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"light-switch-container"},[_c('div',{staticClass:"light-switch-label on-value"}),_c('div',{staticClass:"light-switch-label off-value"})])}]
 
 
-// CONCATENATED MODULE: ./src/LightSwitchField.vue?vue&type=template&id=56cdc27a&
+// CONCATENATED MODULE: ./src/LightSwitchField.vue?vue&type=template&id=34bf4d2a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.join.js
 var es_array_join = __webpack_require__("a15b");
@@ -2074,6 +2074,13 @@ function camelCase(string) {
     });
 
     return string.charAt(0).toLowerCase() + string.substring(1);
+}
+
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/capitalize.js
+function capitalize(string) {
+    return string.split(' ').map(value => {
+        return value.charAt(0).toUpperCase() + value.slice(1);
+    }).join(' ');
 }
 
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/isObject.js
@@ -2420,17 +2427,35 @@ function matches(properties) {
     };
 }
 
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/isNull.js
+function isNull(value) {
+    return value === null;
+}
+
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/isString.js
 function isString(value) {
     return typeof value === 'string';
+}
+
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/isUndefined.js
+function isUndefined(value) {
+    return typeof value === 'undefined';
 }
 
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/get.js
 
 
 
-function get(object, path) {
-    return (isString(path) ? path.split('.') : (!isArray(path) ? [path] : path)).reduce((a, b) => a[b], object);
+
+
+function get(object, path, defaultValue) {
+    const value = (isString(path) ? path.split('.') : (
+        !isArray(path) ? [path] : path)
+    ).reduce((a, b) => a[b], object);
+
+    return !isUndefined(value) && !isNull(value) ? value : (
+        !isUndefined(defaultValue) ? defaultValue : value
+    );
 }
 
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/property.js
@@ -2532,11 +2557,6 @@ function isBoolean(subject) {
             && typeof subject.valueOf() === 'boolean'
     );
 }
-// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/isUndefined.js
-function isUndefined(value) {
-    return typeof value === 'undefined';
-}
-
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/kebabCase.js
 function kebabCase(str) {
     return str && str.replace ?
@@ -2569,6 +2589,27 @@ function prefix_prefix(subject, prefix, delimeter = '-') {
     return subject && prefixer(subject);
 }
 
+// CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/readFile.js
+
+
+function readFile(src, progress) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+            
+        if(isFunction(progress)) {
+            reader.onprogress = e => {
+                if(e.lengthComputable) {
+                    progress(parseInt((e.loaded / e.total) * 100, 10));
+                }
+            };
+        }
+
+        reader.onload = resolve;            
+        reader.onerror = reject;
+        reader.onabort = reject;
+        reader.readAsDataURL(src);
+    });
+}
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/src/script.js
 const LOADED_SCRIPTS = {};
 
@@ -2674,6 +2715,9 @@ function transition(el, defaultValue) {
         && isFinite(value) ? `${value}${uom}` : value;
 });
 // CONCATENATED MODULE: ./node_modules/@vue-interface/utils/index.js
+
+
+
 
 
 
@@ -3139,6 +3183,7 @@ const CUSTOM_PREFIX = 'custom';
 
 
 
+//
 //
 //
 //

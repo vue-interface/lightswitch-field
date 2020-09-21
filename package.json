@@ -39,7 +39,7 @@
   "homepage": "https://github.com/vue-interface/light-switch-field/docs#readme",
   "dependencies": {
     "@vue-interface/form-control": "^0.9.14",
-    "@vue-interface/utils": "^0.9.20",
+    "@vue-interface/utils": "^0.9.23",
     "core-js": "^3.6.0",
     "vue": "^2.6.12"
   },
