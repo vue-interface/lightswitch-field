@@ -38,19 +38,17 @@
   },
   "homepage": "https://github.com/vue-interface/light-switch-field/docs#readme",
   "dependencies": {
-    "@vue-interface/form-control": "^0.9.14",
+    "@vue-interface/form-control": "^0.10.0",
     "@vue-interface/utils": "^0.9.23",
     "core-js": "^3.6.0",
     "vue": "^2.6.12"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.6",
-    "@vue/cli-plugin-eslint": "^4.5.6",
     "@vue/cli-service": "^4.5.6",
     "@vuepress/plugin-register-components": "^1.5.4",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.9.0",
-    "eslint-plugin-vue": "^6.2.2",
     "markdown-it-meta": "0.0.1",
     "postcss-cli": "^7.1.2",
     "sass": "^1.26.10",
