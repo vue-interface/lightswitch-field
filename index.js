@@ -1,2 +1,5 @@
-import LightSwitchField from './src/LightSwitchField';
-export default LightSwitchField;
+import LightSwitchField from './src/LightSwitchField.vue';
+
+export {
+    LightSwitchField
+};

@@ -4,33 +4,30 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>LightSwitchField</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./dist/LightSwitchField.css">
     </head>
     <body>
-        <form id="app" class="container">
-            <h1 class="mb-5">light-switch-field</h1>
+        <form id="app" class="container mx-auto">
+            <h1 class="text-4xl mb-5">light-switch-field</h1>
             
             <light-switch-field v-model="value" :help-text="`Current Value: ${value}`"></light-switch-field>
 
-            <hr>
+            <h2 class="text-2xl mt-6 mb-3">Sizes</h2>
 
-            <h3>Sizes</h3>
+            <light-switch-field size="sm" label="Small (sm)"></light-switch-field>
 
-            <light-switch-field v-model="value" size="xs" id="xs" label="Extra Small (xs)"></light-switch-field>
+            <light-switch-field size="md" label="Medium (md)"></light-switch-field>
 
-            <light-switch-field v-model="value" size="sm" label="Small (sm)"></light-switch-field>
-
-            <light-switch-field v-model="value" size="md" label="Medium (md)"></light-switch-field>
-
-            <light-switch-field v-model="value" size="lg" label="Large (lg)"></light-switch-field>
-
-            <light-switch-field v-model="value" size="xl" label="Extra Large (xl)"></light-switch-field>
+            <light-switch-field size="lg" label="Large (lg)"></light-switch-field>
         </form>
 
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
-        <script type="text/javascript" src="./dist/LightSwitchField.umd.js"></script>
-        <script type="text/javascript">
+        <script type="module">
+            import './index.css';
+            import Vue from 'vue/dist/vue';
+            import { LightSwitchField } from './index.js';
+
+            Vue.config.devtools = false;
+            Vue.config.productionTip = false;
+              
             const vue = new Vue({
                 el: '#app',
                 components: {
