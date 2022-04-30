@@ -1,6 +1,5 @@
 <template>
     <div :class="formGroupClasses">
-
         <div
             ref="input"
             :class="controlClasses"
@@ -14,7 +13,6 @@
                 <label
                     v-if="label"
                     :for="$attrs.id"
-                    :class="{[labelClass]: !!labelClass}"
                     style="padding-left: .5em">
                     <slot>{{ label }}</slot>
                 </label>
@@ -135,7 +133,7 @@ export default {
 
     watch: {
         currentValue(value) {
-            this.$emit('input', value)
+            this.$emit('input', value);
         }
     },
 
