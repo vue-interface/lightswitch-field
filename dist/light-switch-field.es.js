@@ -362,7 +362,7 @@ var render = function() {
       return null;
     }
     return _vm.toggle(true);
-  }] } }, [_c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.currentValue, expression: "currentValue" }], ref: "input", staticClass: "form-check-input", attrs: { "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.currentValue) ? _vm._i(_vm.currentValue, null) > -1 : _vm.currentValue }, on: { "change": function($event) {
+  }] } }, [_c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.currentValue, expression: "currentValue" }], ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.currentValue) ? _vm._i(_vm.currentValue, null) > -1 : _vm.currentValue }, on: { "change": function($event) {
     var $$a = _vm.currentValue, $$el = $event.target, $$c = $$el.checked ? true : false;
     if (Array.isArray($$a)) {
       var $$v = null, $$i = _vm._i($$a, $$v);
@@ -375,7 +375,7 @@ var render = function() {
       _vm.currentValue = $$c;
     }
   } } }), _vm._t("label", function() {
-    return [_vm.label ? _c("label", { staticStyle: { "padding-left": ".5em" }, attrs: { "for": _vm.$attrs.id } }, [_vm._t("default", function() {
+    return [_vm.label ? _c("label", { staticStyle: { "padding-left": ".5em" }, attrs: { "for": _vm.$attrs.id || _vm.hash } }, [_vm._t("default", function() {
       return [_vm._v(_vm._s(_vm.label))];
     })], 2) : _vm._e()];
   })], 2), _vm._t("feedback", function() {
@@ -462,9 +462,11 @@ const __vue2_script = {
       default: 0
     }
   },
-  data: () => ({
-    currentValue: null
-  }),
+  data() {
+    return {
+      currentValue: this.$attrs.currentValue === this.onValue
+    };
+  },
   computed: {
     isActive: function() {
       return this.currentValue === this.onValue;
@@ -483,11 +485,13 @@ const __vue2_script = {
         this.invalidFeedback ? "is-invalid" : "",
         this.isActive ? "is-active" : ""
       ].join(" ");
+    },
+    hash() {
+      return Math.random().toString(20).substr(2, 6);
     }
   },
   watch: {
     currentValue(value) {
-      console.log(value);
       this.$emit("input", !!value ? this.onValue : this.offValue);
     }
   },

@@ -6,11 +6,16 @@
             @keyup.32="toggle(currentValue)"
             @keyup.37="toggle(false)"
             @keyup.39="toggle(true)">
-            <input ref="input" v-model="currentValue" type="checkbox" class="form-check-input">
+            <input
+                :id="$attrs.id || hash"
+                ref="input"
+                v-model="currentValue"
+                type="checkbox"
+                class="form-check-input">
             <slot name="label">
                 <label
                     v-if="label"
-                    :for="$attrs.id"
+                    :for="$attrs.id || hash"
                     style="padding-left: .5em">
                     <slot>{{ label }}</slot>
                 </label>
@@ -107,9 +112,11 @@ export default {
 
     },
 
-    data: () => ({
-        currentValue: null
-    }),
+    data() {
+        return {
+            currentValue: this.$attrs.currentValue === this.onValue
+        };
+    },
 
     computed: {
 
@@ -133,14 +140,16 @@ export default {
                 (this.invalidFeedback ? 'is-invalid' : ''),
                 (this.isActive ? 'is-active' : '')
             ].join(' ');
+        },
+
+        hash() {
+            return Math.random().toString(20).substr(2, 6);
         }
 
     },
 
     watch: {
         currentValue(value) {
-            console.log(value);
-
             this.$emit('input', !!value ? this.onValue : this.offValue);
         }
     },
