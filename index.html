@@ -9,7 +9,12 @@
         <form id="app" class="container mx-auto">
             <h1 class="text-4xl mb-5">light-switch-field</h1>
             
-            <light-switch-field v-model="value" :help-text="`Current Value: ${value}`"></light-switch-field>
+            <light-switch-field
+                v-model="value"
+                :on-value="true"
+                :off-value="false"
+                :help-text="`Current Value: ${value}`">
+            </light-switch-field>
 
             <h2 class="text-2xl mt-6 mb-3">Sizes</h2>
 
@@ -35,7 +40,7 @@
                 },
                 data() {
                     return {
-                        value: null
+                        value: false
                     };
                 }
             });

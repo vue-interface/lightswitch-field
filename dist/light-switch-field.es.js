@@ -347,24 +347,22 @@ var render = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { class: _vm.formGroupClasses }, [_c("div", { ref: "input", class: _vm.controlClasses, attrs: { "tabindex": "0" }, on: { "click": function($event) {
-    return _vm.toggle();
-  }, "keyup": [function($event) {
+  return _c("div", { class: _vm.formGroupClasses }, [_c("div", { ref: "input", class: _vm.controlClasses, on: { "keyup": [function($event) {
     if (!$event.type.indexOf("key") && $event.keyCode !== 32) {
       return null;
     }
-    return _vm.toggle();
+    return _vm.toggle(_vm.currentValue);
   }, function($event) {
     if (!$event.type.indexOf("key") && $event.keyCode !== 37) {
       return null;
     }
-    return _vm.toggle(_vm.offValue);
+    return _vm.toggle(false);
   }, function($event) {
     if (!$event.type.indexOf("key") && $event.keyCode !== 39) {
       return null;
     }
-    return _vm.toggle(_vm.onValue);
-  }] } }, [_c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.currentValue, expression: "currentValue" }], staticClass: "form-check-input", attrs: { "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.currentValue) ? _vm._i(_vm.currentValue, null) > -1 : _vm.currentValue }, on: { "change": function($event) {
+    return _vm.toggle(true);
+  }] } }, [_c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.currentValue, expression: "currentValue" }], ref: "input", staticClass: "form-check-input", attrs: { "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.currentValue) ? _vm._i(_vm.currentValue, null) > -1 : _vm.currentValue }, on: { "change": function($event) {
     var $$a = _vm.currentValue, $$el = $event.target, $$c = $$el.checked ? true : false;
     if (Array.isArray($$a)) {
       var $$v = null, $$i = _vm._i($$a, $$v);
@@ -443,6 +441,9 @@ const __vue2_script = {
   mixins: [
     FormControl
   ],
+  model: {
+    prop: "currentValue"
+  },
   props: {
     activeClass: {
       type: String,
@@ -451,9 +452,6 @@ const __vue2_script = {
     defaultControlClass: {
       type: String,
       default: "form-switch"
-    },
-    defaultValue: {
-      default: false
     },
     onValue: {
       type: [String, Number, Boolean, Object, Array],
@@ -464,6 +462,9 @@ const __vue2_script = {
       default: 0
     }
   },
+  data: () => ({
+    currentValue: null
+  }),
   computed: {
     isActive: function() {
       return this.currentValue === this.onValue;
@@ -486,7 +487,8 @@ const __vue2_script = {
   },
   watch: {
     currentValue(value) {
-      this.$emit("input", value);
+      console.log(value);
+      this.$emit("input", !!value ? this.onValue : this.offValue);
     }
   },
   methods: {
@@ -503,7 +505,7 @@ const __vue2_script = {
       throw new Error(`"${unit[0]}" is not a valid unit of measure. Unit must be "s" (seconds) or "ms" (milliseconds).`);
     },
     toggle(value) {
-      this.currentValue = typeof value === "undefined" ? !this.currentValue : value;
+      this.currentValue = value;
     }
   }
 };

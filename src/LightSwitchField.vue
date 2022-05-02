@@ -3,12 +3,10 @@
         <div
             ref="input"
             :class="controlClasses"
-            tabindex="0"
-            @click="toggle()"
-            @keyup.32="toggle()"
-            @keyup.37="toggle(offValue)"
-            @keyup.39="toggle(onValue)">
-            <input v-model="currentValue" type="checkbox" class="form-check-input">
+            @keyup.32="toggle(currentValue)"
+            @keyup.37="toggle(false)"
+            @keyup.39="toggle(true)">
+            <input ref="input" v-model="currentValue" type="checkbox" class="form-check-input">
             <slot name="label">
                 <label
                     v-if="label"
@@ -51,6 +49,10 @@ export default {
         FormControl
     ],
 
+    model: {
+        prop: 'currentValue'
+    },
+
     props: {
 
         /**
@@ -73,15 +75,15 @@ export default {
             default: 'form-switch'
         },
 
-        /**
-         * The field's default value.
-         *
-         * @param
-         * @default false
-         */
-        defaultValue: {
-            default: false
-        },
+        // /**
+        //  * The field's default value.
+        //  *
+        //  * @param
+        //  * @default false
+        //  */
+        // defaultValue: {
+        //     default: false
+        // },
 
         /**
          * The class name assigned to the control element
@@ -104,6 +106,10 @@ export default {
         }
 
     },
+
+    data: () => ({
+        currentValue: null
+    }),
 
     computed: {
 
@@ -133,7 +139,9 @@ export default {
 
     watch: {
         currentValue(value) {
-            this.$emit('input', value);
+            console.log(value);
+
+            this.$emit('input', !!value ? this.onValue : this.offValue);
         }
     },
 
@@ -155,7 +163,7 @@ export default {
         },
         
         toggle(value) {
-            this.currentValue = typeof value === 'undefined' ? !this.currentValue : value;
+            this.currentValue = value;
         }
 
     }
