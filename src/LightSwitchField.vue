@@ -3,15 +3,15 @@
         <div
             ref="input"
             :class="controlClasses"
-            @keyup.32="toggle(currentValue)"
-            @keyup.37="toggle(false)"
-            @keyup.39="toggle(true)">
+            @keyup.32="toggle()"
+            @keyup.37="toggle(offValue)"
+            @keyup.39="toggle(onValu)">
             <input
                 :id="$attrs.id || hash"
                 ref="input"
-                v-model="currentValue"
                 type="checkbox"
-                class="form-check-input">
+                class="form-check-input"
+                @input="onInput">
             <slot name="label">
                 <label
                     v-if="label"
@@ -61,14 +61,11 @@ export default {
     props: {
 
         /**
-         * The class name assigned to the control element
+         * The class assigned to the control element when the switch is on.
          *
          * @property String
          */
-        activeClass: {
-            type: String,
-            default: 'on'
-        },
+        activeClass: String,
 
         /**
          * The class name assigned to the control element
@@ -80,15 +77,12 @@ export default {
             default: 'form-switch'
         },
 
-        // /**
-        //  * The field's default value.
-        //  *
-        //  * @param
-        //  * @default false
-        //  */
-        // defaultValue: {
-        //     default: false
-        // },
+        /**
+         * The class assigned to the control element when the switch is off.
+         *
+         * @property String
+         */
+        inactiveClass: String,
 
         /**
          * The class name assigned to the control element
@@ -114,7 +108,7 @@ export default {
 
     data() {
         return {
-            currentValue: this.$attrs.currentValue === this.onValue
+            currentValue: this.value
         };
     },
 
@@ -138,7 +132,9 @@ export default {
                 this.controlSizeClass,
                 (this.spacing || ''),
                 (this.invalidFeedback ? 'is-invalid' : ''),
-                (this.isActive ? 'is-active' : '')
+                (this.isActive ? 'is-active' : ''),
+                (this.isActive ? this.activeClass : ''),
+                (!this.isActive ? this.inactiveClass : ''),
             ].join(' ');
         },
 
@@ -172,7 +168,15 @@ export default {
         },
         
         toggle(value) {
+            if(value === undefined) {
+                value = this.isActive ? this.offValue : this.onValue;
+            }
+
             this.currentValue = value;
+        },
+        
+        onInput(e) {
+            this.currentValue = e.target.checked ? this.onValue : this.offValue;
         }
 
     }

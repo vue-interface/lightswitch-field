@@ -11,6 +11,7 @@
             
             <light-switch-field
                 v-model="value"
+                :value="value"
                 :on-value="true"
                 :off-value="false"
                 :help-text="`Current Value: ${value}`">
@@ -23,6 +24,10 @@
             <light-switch-field size="md" label="Medium (md)"></light-switch-field>
 
             <light-switch-field size="lg" label="Large (lg)"></light-switch-field>
+
+            <h2 class="text-2xl mt-6 mb-3">Custom Colors</h2>
+
+            <light-switch-field size="md" class="custom-colors"></light-switch-field>
         </form>
 
         <script type="module">
@@ -40,10 +45,26 @@
                 },
                 data() {
                     return {
-                        value: false
+                        value: true
                     };
                 }
             });
         </script>
+
+        <style>
+            .custom-colors .form-switch.form-control .form-check-input {
+                background-color: purple;
+                border-color: violet;
+                box-shadow: 0 0 0 0.2rem rgba(171, 22, 216, 0.25);
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='violet' /%3e%3c/svg%3e");
+            }
+
+            .custom-colors .form-switch.form-control .form-check-input:checked {
+                background-color: green;
+                border-color: darkgreen;
+                box-shadow: 0 0 0 0.2rem rgb(0 255 0 / 25%);
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='lightgreen' /%3e%3c/svg%3e");
+            }
+        </style>
     </body>
 </html>

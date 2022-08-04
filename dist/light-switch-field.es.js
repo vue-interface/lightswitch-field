@@ -1,3 +1,21 @@
+const global = {};
+function config(...args) {
+  if (!args.length) {
+    return global;
+  }
+  const [key, value] = args;
+  if (typeof key === "string") {
+    return typeof global[key] !== "undefined" ? global[key] : value;
+  }
+  if (Array.isArray(key)) {
+    return key.reduce((carry, key2) => {
+      return Object.assign(carry, {
+        [key2]: global[key2]
+      });
+    }, {});
+  }
+  return Object.assign(global, ...args);
+}
 var Shadowable = {
   props: {
     dropShadow: [Boolean, String],
@@ -90,24 +108,6 @@ function paramCase(input, options) {
     delimiter: "-"
   }, options));
 }
-const global = {};
-function config(...args) {
-  if (!args.length) {
-    return global;
-  }
-  const [key, value] = args;
-  if (typeof key === "string") {
-    return typeof global[key] !== "undefined" ? global[key] : value;
-  }
-  if (Array.isArray(key)) {
-    return key.reduce((carry, key2) => {
-      return Object.assign(carry, {
-        [key2]: global[key2]
-      });
-    }, {});
-  }
-  return Object.assign(global, ...args);
-}
 function prefix(key, value, delimeter = "-") {
   const string = value.toString().replace(new RegExp(`^${key}${delimeter}?`), "");
   return [paramCase(string), key].filter((value2) => !!value2).join(delimeter);
@@ -125,7 +125,7 @@ var FormControl = {
         el.addEventListener("blur", () => {
           vnode.context.hasFocus = false;
         });
-        el.addEventListener(el.tagName === "SELECT" ? "change" : "input", (e) => {
+        el.addEventListener("input", (e) => {
           vnode.context.isEmpty = !el.value;
           vnode.context.currentValue = el.value;
         });
@@ -140,6 +140,7 @@ var FormControl = {
           if (opt && opt.value === el.value) {
             vnode.context.defaultEmpty = true;
           }
+          vnode.context.isEmpty = !el.querySelector("[selected]") && !el.value;
         }
       }
     }
@@ -309,9 +310,7 @@ var FormControl = {
     }
   },
   mounted() {
-    if (this.value === null && this.defaultValue !== null) {
-      this.$emit("input", this.defaultValue);
-    }
+    this.$emit("input", this.currentValue);
   },
   methods: {
     blur() {
@@ -351,30 +350,18 @@ var render = function() {
     if (!$event.type.indexOf("key") && $event.keyCode !== 32) {
       return null;
     }
-    return _vm.toggle(_vm.currentValue);
+    return _vm.toggle();
   }, function($event) {
     if (!$event.type.indexOf("key") && $event.keyCode !== 37) {
       return null;
     }
-    return _vm.toggle(false);
+    return _vm.toggle(_vm.offValue);
   }, function($event) {
     if (!$event.type.indexOf("key") && $event.keyCode !== 39) {
       return null;
     }
-    return _vm.toggle(true);
-  }] } }, [_c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.currentValue, expression: "currentValue" }], ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.currentValue) ? _vm._i(_vm.currentValue, null) > -1 : _vm.currentValue }, on: { "change": function($event) {
-    var $$a = _vm.currentValue, $$el = $event.target, $$c = $$el.checked ? true : false;
-    if (Array.isArray($$a)) {
-      var $$v = null, $$i = _vm._i($$a, $$v);
-      if ($$el.checked) {
-        $$i < 0 && (_vm.currentValue = $$a.concat([$$v]));
-      } else {
-        $$i > -1 && (_vm.currentValue = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
-      }
-    } else {
-      _vm.currentValue = $$c;
-    }
-  } } }), _vm._t("label", function() {
+    return _vm.toggle(_vm.onValu);
+  }] } }, [_c("input", { ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, on: { "input": _vm.onInput } }), _vm._t("label", function() {
     return [_vm.label ? _c("label", { staticStyle: { "padding-left": ".5em" }, attrs: { "for": _vm.$attrs.id || _vm.hash } }, [_vm._t("default", function() {
       return [_vm._v(_vm._s(_vm.label))];
     })], 2) : _vm._e()];
@@ -415,7 +402,10 @@ function normalizeComponent(scriptExports, render2, staticRenderFns2, functional
     options._ssrRegister = hook;
   } else if (injectStyles) {
     hook = shadowMode ? function() {
-      injectStyles.call(this, (options.functional ? this.parent : this).$root.$options.shadowRoot);
+      injectStyles.call(
+        this,
+        (options.functional ? this.parent : this).$root.$options.shadowRoot
+      );
     } : injectStyles;
   }
   if (hook) {
@@ -445,14 +435,12 @@ const __vue2_script = {
     prop: "currentValue"
   },
   props: {
-    activeClass: {
-      type: String,
-      default: "on"
-    },
+    activeClass: String,
     defaultControlClass: {
       type: String,
       default: "form-switch"
     },
+    inactiveClass: String,
     onValue: {
       type: [String, Number, Boolean, Object, Array],
       default: 1
@@ -464,7 +452,7 @@ const __vue2_script = {
   },
   data() {
     return {
-      currentValue: this.$attrs.currentValue === this.onValue
+      currentValue: this.value
     };
   },
   computed: {
@@ -483,7 +471,9 @@ const __vue2_script = {
         this.controlSizeClass,
         this.spacing || "",
         this.invalidFeedback ? "is-invalid" : "",
-        this.isActive ? "is-active" : ""
+        this.isActive ? "is-active" : "",
+        this.isActive ? this.activeClass : "",
+        !this.isActive ? this.inactiveClass : ""
       ].join(" ");
     },
     hash() {
@@ -509,12 +499,27 @@ const __vue2_script = {
       throw new Error(`"${unit[0]}" is not a valid unit of measure. Unit must be "s" (seconds) or "ms" (milliseconds).`);
     },
     toggle(value) {
+      if (value === void 0) {
+        value = this.isActive ? this.offValue : this.onValue;
+      }
       this.currentValue = value;
+    },
+    onInput(e) {
+      this.currentValue = e.target.checked ? this.onValue : this.offValue;
     }
   }
 };
 const __cssModules = {};
-var __component__ = /* @__PURE__ */ normalizeComponent(__vue2_script, render, staticRenderFns, false, __vue2_injectStyles, null, null, null);
+var __component__ = /* @__PURE__ */ normalizeComponent(
+  __vue2_script,
+  render,
+  staticRenderFns,
+  false,
+  __vue2_injectStyles,
+  null,
+  null,
+  null
+);
 function __vue2_injectStyles(context) {
   for (let o in __cssModules) {
     this[o] = __cssModules[o];
