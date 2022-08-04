@@ -11,6 +11,7 @@
                 ref="input"
                 type="checkbox"
                 class="form-check-input"
+                :checked="currentValue === onValue"
                 @input="onInput">
             <slot name="label">
                 <label
@@ -53,10 +54,6 @@ export default {
     mixins: [
         FormControl
     ],
-
-    model: {
-        prop: 'currentValue'
-    },
 
     props: {
 

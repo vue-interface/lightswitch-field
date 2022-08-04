@@ -52,14 +52,15 @@
         </script>
 
         <style>
-            .custom-colors .form-switch.form-control .form-check-input {
+            .custom-colors .form-switch .form-check-input,
+            .custom-colors .form-switch .form-check-input:focus {
                 background-color: purple;
                 border-color: violet;
                 box-shadow: 0 0 0 0.2rem rgba(171, 22, 216, 0.25);
                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='violet' /%3e%3c/svg%3e");
             }
 
-            .custom-colors .form-switch.form-control .form-check-input:checked {
+            .custom-colors .form-switch .form-check-input:checked {
                 background-color: green;
                 border-color: darkgreen;
                 box-shadow: 0 0 0 0.2rem rgb(0 255 0 / 25%);

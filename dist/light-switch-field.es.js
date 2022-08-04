@@ -361,7 +361,7 @@ var render = function() {
       return null;
     }
     return _vm.toggle(_vm.onValu);
-  }] } }, [_c("input", { ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, on: { "input": _vm.onInput } }), _vm._t("label", function() {
+  }] } }, [_c("input", { ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, domProps: { "checked": _vm.currentValue === _vm.onValue }, on: { "input": _vm.onInput } }), _vm._t("label", function() {
     return [_vm.label ? _c("label", { staticStyle: { "padding-left": ".5em" }, attrs: { "for": _vm.$attrs.id || _vm.hash } }, [_vm._t("default", function() {
       return [_vm._v(_vm._s(_vm.label))];
     })], 2) : _vm._e()];
@@ -431,9 +431,6 @@ const __vue2_script = {
   mixins: [
     FormControl
   ],
-  model: {
-    prop: "currentValue"
-  },
   props: {
     activeClass: String,
     defaultControlClass: {
