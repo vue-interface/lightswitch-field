@@ -1,5 +1,7 @@
 <template>
     <div :class="formGroupClasses">
+        currentValue: {{ currentValue }}
+        onvalue: {{ onValue }}<br>
         <div
             ref="input"
             :class="controlClasses"
@@ -9,10 +11,10 @@
             <input
                 :id="$attrs.id || hash"
                 ref="input"
-                v-model="currentValue"
+                :checked="currentValue === onValue"
                 type="checkbox"
                 class="form-check-input"
-                @input="$emit('input', currentValue === onValue)">
+                @input="e => toggle(e.target.checked ? onValue : offValue)">
             <slot name="label">
                 <label
                     v-if="label"
@@ -105,7 +107,7 @@ export default {
 
     data() {
         return {
-            currentValue: this.value
+            currentValue: this.value === this.onValue ? this.onValue : this.offValue
         };
     },
 
@@ -139,6 +141,13 @@ export default {
             return Math.random().toString(20).substr(2, 6);
         }
 
+    },
+
+    watch: {
+        currentValue(value) {
+
+            this.$emit('input', value);
+        }
     },
 
     methods: {

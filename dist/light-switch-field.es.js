@@ -346,7 +346,7 @@ var render = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { class: _vm.formGroupClasses }, [_c("div", { ref: "input", class: _vm.controlClasses, on: { "keyup": [function($event) {
+  return _c("div", { class: _vm.formGroupClasses }, [_vm._v(" currentValue: " + _vm._s(_vm.currentValue) + " onvalue: " + _vm._s(_vm.onValue)), _c("br"), _c("div", { ref: "input", class: _vm.controlClasses, on: { "keyup": [function($event) {
     if (!$event.type.indexOf("key") && $event.keyCode !== 32) {
       return null;
     }
@@ -361,20 +361,8 @@ var render = function() {
       return null;
     }
     return _vm.toggle(_vm.onValu);
-  }] } }, [_c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.currentValue, expression: "currentValue" }], ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.currentValue) ? _vm._i(_vm.currentValue, null) > -1 : _vm.currentValue }, on: { "input": function($event) {
-    return _vm.$emit("input", _vm.currentValue === _vm.onValue);
-  }, "change": function($event) {
-    var $$a = _vm.currentValue, $$el = $event.target, $$c = $$el.checked ? true : false;
-    if (Array.isArray($$a)) {
-      var $$v = null, $$i = _vm._i($$a, $$v);
-      if ($$el.checked) {
-        $$i < 0 && (_vm.currentValue = $$a.concat([$$v]));
-      } else {
-        $$i > -1 && (_vm.currentValue = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
-      }
-    } else {
-      _vm.currentValue = $$c;
-    }
+  }] } }, [_c("input", { ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, domProps: { "checked": _vm.currentValue === _vm.onValue }, on: { "input": function(e) {
+    return _vm.toggle(e.target.checked ? _vm.onValue : _vm.offValue);
   } } }), _vm._t("label", function() {
     return [_vm.label ? _c("label", { staticStyle: { "padding-left": ".5em" }, attrs: { "for": _vm.$attrs.id || _vm.hash } }, [_vm._t("default", function() {
       return [_vm._v(_vm._s(_vm.label))];
@@ -463,7 +451,7 @@ const __vue2_script = {
   },
   data() {
     return {
-      currentValue: this.value
+      currentValue: this.value === this.onValue ? this.onValue : this.offValue
     };
   },
   computed: {
@@ -489,6 +477,11 @@ const __vue2_script = {
     },
     hash() {
       return Math.random().toString(20).substr(2, 6);
+    }
+  },
+  watch: {
+    currentValue(value) {
+      this.$emit("input", value);
     }
   },
   methods: {
