@@ -346,7 +346,7 @@ var render = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { class: _vm.formGroupClasses }, [_vm._v(" currentValue: " + _vm._s(_vm.currentValue) + " onvalue: " + _vm._s(_vm.onValue)), _c("br"), _c("div", { ref: "input", class: _vm.controlClasses, on: { "keyup": [function($event) {
+  return _c("div", { class: _vm.formGroupClasses }, [_c("div", { ref: "input", class: _vm.controlClasses, on: { "keyup": [function($event) {
     if (!$event.type.indexOf("key") && $event.keyCode !== 32) {
       return null;
     }

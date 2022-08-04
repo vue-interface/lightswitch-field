@@ -1,7 +1,5 @@
 <template>
     <div :class="formGroupClasses">
-        currentValue: {{ currentValue }}
-        onvalue: {{ onValue }}<br>
         <div
             ref="input"
             :class="controlClasses"
