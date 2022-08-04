@@ -1,6 +1,6 @@
 {
   "name": "@vue-interface/light-switch-field",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A Vue light switch field component.",
   "files": [
     "index.js",
