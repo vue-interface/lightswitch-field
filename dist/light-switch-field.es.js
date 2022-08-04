@@ -361,7 +361,21 @@ var render = function() {
       return null;
     }
     return _vm.toggle(_vm.onValu);
-  }] } }, [_c("input", { ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, domProps: { "checked": _vm.currentValue === _vm.onValue }, on: { "input": _vm.onInput } }), _vm._t("label", function() {
+  }] } }, [_c("input", { directives: [{ name: "model", rawName: "v-model", value: _vm.currentValue, expression: "currentValue" }], ref: "input", staticClass: "form-check-input", attrs: { "id": _vm.$attrs.id || _vm.hash, "type": "checkbox" }, domProps: { "checked": Array.isArray(_vm.currentValue) ? _vm._i(_vm.currentValue, null) > -1 : _vm.currentValue }, on: { "input": function($event) {
+    return _vm.$emit("input", _vm.currentValue === _vm.onValue);
+  }, "change": function($event) {
+    var $$a = _vm.currentValue, $$el = $event.target, $$c = $$el.checked ? true : false;
+    if (Array.isArray($$a)) {
+      var $$v = null, $$i = _vm._i($$a, $$v);
+      if ($$el.checked) {
+        $$i < 0 && (_vm.currentValue = $$a.concat([$$v]));
+      } else {
+        $$i > -1 && (_vm.currentValue = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+      }
+    } else {
+      _vm.currentValue = $$c;
+    }
+  } } }), _vm._t("label", function() {
     return [_vm.label ? _c("label", { staticStyle: { "padding-left": ".5em" }, attrs: { "for": _vm.$attrs.id || _vm.hash } }, [_vm._t("default", function() {
       return [_vm._v(_vm._s(_vm.label))];
     })], 2) : _vm._e()];
@@ -477,11 +491,6 @@ const __vue2_script = {
       return Math.random().toString(20).substr(2, 6);
     }
   },
-  watch: {
-    currentValue(value) {
-      this.$emit("input", !!value ? this.onValue : this.offValue);
-    }
-  },
   methods: {
     getTransitionInMilliseconds() {
       const duration = getComputedStyle(this.getInputField()).transitionDuration;
@@ -500,9 +509,6 @@ const __vue2_script = {
         value = this.isActive ? this.offValue : this.onValue;
       }
       this.currentValue = value;
-    },
-    onInput(e) {
-      this.currentValue = e.target.checked ? this.onValue : this.offValue;
     }
   }
 };

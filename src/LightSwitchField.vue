@@ -9,10 +9,10 @@
             <input
                 :id="$attrs.id || hash"
                 ref="input"
+                v-model="currentValue"
                 type="checkbox"
                 class="form-check-input"
-                :checked="currentValue === onValue"
-                @input="onInput">
+                @input="$emit('input', currentValue === onValue)">
             <slot name="label">
                 <label
                     v-if="label"
@@ -141,12 +141,6 @@ export default {
 
     },
 
-    watch: {
-        currentValue(value) {
-            this.$emit('input', !!value ? this.onValue : this.offValue);
-        }
-    },
-
     methods: {
 
         getTransitionInMilliseconds() {
@@ -170,10 +164,6 @@ export default {
             }
 
             this.currentValue = value;
-        },
-        
-        onInput(e) {
-            this.currentValue = e.target.checked ? this.onValue : this.offValue;
         }
 
     }
