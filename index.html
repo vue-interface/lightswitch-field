@@ -31,14 +31,10 @@
 
         <script type="module">
             import './index.css';
-            import Vue from 'vue/dist/vue';
+            import { createApp } from 'vue/dist/vue.esm-bundler';
             import { LightSwitchField } from './index.js';
-
-            Vue.config.devtools = false;
-            Vue.config.productionTip = false;
               
-            const vue = new Vue({
-                el: '#app',
+            const vue = createApp({
                 components: {
                     LightSwitchField
                 },
@@ -47,7 +43,8 @@
                         value: true
                     };
                 }
-            });
+            })
+            .mount('#app');
         </script>
 
         <style>

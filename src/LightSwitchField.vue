@@ -3,9 +3,9 @@
         <div
             ref="input"
             :class="controlClasses"
-            @keyup.32="toggle()"
-            @keyup.37="toggle(offValue)"
-            @keyup.39="toggle(onValu)">
+            @keyup.space="toggle()"
+            @keyup.arrow-left="toggle(offValue)"
+            @keyup.arrow-right="toggle(onValue)">
             <input
                 :id="$attrs.id || hash"
                 ref="input"
@@ -105,7 +105,7 @@ export default {
 
     data() {
         return {
-            currentValue: this.value === this.onValue ? this.onValue : this.offValue
+            currentValue: this.modelValue === this.onValue ? this.onValue : this.offValue
         };
     },
 
@@ -143,7 +143,7 @@ export default {
 
     watch: {
         currentValue(value) {
-            this.$emit('input', value);
+            this.$emit('update:modelValue', value);
         }
     },
 
