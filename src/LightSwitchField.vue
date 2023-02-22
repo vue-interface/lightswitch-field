@@ -1,59 +1,12 @@
-<template>
-    <div :class="formGroupClasses">
-        <div
-            ref="input"
-            :class="controlClasses"
-            @keyup.space="toggle()"
-            @keyup.arrow-left="toggle(offValue)"
-            @keyup.arrow-right="toggle(onValue)">
-            <input
-                :id="$attrs.id || hash"
-                ref="input"
-                :checked="currentValue === onValue"
-                type="checkbox"
-                class="form-check-input"
-                @input="e => toggle(e.target.checked ? onValue : offValue)">
-            <slot name="label">
-                <label
-                    v-if="label"
-                    :for="$attrs.id || hash"
-                    style="padding-left: .5em">
-                    <slot>{{ label }}</slot>
-                </label>
-            </slot>
-        </div>
-
-        <slot name="feedback">
-            <div 
-                v-if="invalidFeedback"
-                class="invalid-feedback"
-                invalid
-                v-html="invalidFeedback" />
-            <div 
-                v-else-if="validFeedback"
-                class="valid-feedback"
-                valid
-                v-html="validFeedback" />
-        </slot>
-
-        <slot name="help">
-            <small v-if="helpText" ref="help">
-                {{ helpText }}
-            </small>
-        </slot>
-    </div>
-</template>
-
-<script>
+<script lang="ts">
 import { FormControl } from '@vue-interface/form-control';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
 
     name: 'LightSwitchField',
 
-    mixins: [
-        FormControl
-    ],
+    extends: FormControl,
 
     props: {
 
@@ -62,14 +15,17 @@ export default {
          *
          * @property String
          */
-        activeClass: String,
+        activeClass: {
+            type: String,
+            default: undefined
+        },
 
         /**
          * The class name assigned to the control element
          *
          * @property String
          */
-        defaultControlClass: {
+        formControlClass: {
             type: String,
             default: 'form-switch'
         },
@@ -79,7 +35,10 @@ export default {
          *
          * @property String
          */
-        inactiveClass: String,
+        inactiveClass: {
+            type: String,
+            default: undefined
+        },
 
         /**
          * The class name assigned to the control element
@@ -103,16 +62,29 @@ export default {
 
     },
 
-    data() {
-        return {
-            currentValue: this.modelValue === this.onValue ? this.onValue : this.offValue
-        };
-    },
+    // data() {
+    //     return {
+    //         currentValue: this.modelValue === this.onValue
+    //             ? this.onValue
+    //             : this.offValue
+    //     };
+    // },
 
     computed: {
+        
+        model: {
+            get() {
+                return this.getModelValue() === this.onValue;
+            },
+            set(value: any) {
+                this.setModelValue(
+                    value === true ? this.onValue : this.offValue
+                );
+            }
+        },
 
-        isActive: function() {
-            return this.currentValue === this.onValue;
+        isActive: function () {
+            return this.model === this.onValue;
         },
 
         controlSizeClass() {
@@ -121,58 +93,96 @@ export default {
             }
 
             return this.size && `form-control-${this.size}`;
-        },
-
-        controlClasses() {
-            return [
-                this.controlClass,
-                this.controlSizeClass,
-                (this.spacing || ''),
-                (this.invalidFeedback ? 'is-invalid' : ''),
-                (this.isActive ? 'is-active' : ''),
-                (this.isActive ? this.activeClass : ''),
-                (!this.isActive ? this.inactiveClass : ''),
-            ].join(' ');
-        },
-
-        hash() {
-            return Math.random().toString(20).substr(2, 6);
         }
 
-    },
-
-    watch: {
-        currentValue(value) {
-            this.$emit('update:modelValue', value);
-        }
     },
 
     methods: {
 
-        getTransitionInMilliseconds() {
-            const duration = getComputedStyle(this.getInputField()).transitionDuration;
-            const numeric = parseFloat(duration, 10);
-            const unit = duration.match(/m?s/);
+        toggle(value?: any) {
+            console.log('toggle', value);
+            // if (value === undefined) {
+            //     value = this.isActive ? this.offValue : this.onValue;
+            // }
 
-            switch (unit[0]) {
-            case 's':
-                return numeric * 1000;
-            case 'ms':
-                return numeric;
-            }
-
-            throw new Error(`"${unit[0]}" is not a valid unit of measure. Unit must be "s" (seconds) or "ms" (milliseconds).`);
-        },
-        
-        toggle(value) {
-            if(value === undefined) {
-                value = this.isActive ? this.offValue : this.onValue;
-            }
-
-            this.currentValue = value;
+            // this.currentValue = value;
         }
 
     }
 
-};
+});
 </script>
+
+
+<template>
+    <div :class="formGroupClasses">
+        <div
+            ref="input"
+            :class="{
+                ...controlClasses,
+                ['is-valid']: isValid,
+                ['is-invalid']: isInvalid,
+                ['is-active']: isActive,
+                [String(activeClass)]: isActive,
+                [String(inactiveClass)]: !isActive,
+            }"
+            @keyup.space="$event => toggle()"
+            @keyup.arrow-left="$event => toggle(offValue)"
+            @keyup.arrow-right="$event => toggle(onValue)">
+            <input
+                :id="id"
+                ref="input"
+                v-model="model"
+                type="checkbox"
+                class="form-check-input">
+            <slot name="label">
+                <label
+                    v-if="label"
+                    :for="id"
+                    style="padding-left: .5em">
+                    <slot>{{ label }}</slot>
+                </label>
+            </slot>
+        </div>
+
+        <slot
+            name="errors"
+            v-bind="{ error, errors, id: $attrs.id, name: $attrs.name }">        
+            <FormControlErrors
+                v-if="!!(error || errors)"
+                :id="$attrs.id"
+                v-slot="{ error }"
+                :name="$attrs.name"
+                :error="error"
+                :errors="errors">
+                <div
+                    invalid
+                    class="invalid-feedback">
+                    {{ error }}<br>
+                </div>
+            </FormControlErrors>
+        </slot>
+        
+        <slot
+            name="feedback"
+            v-bind="{ feedback }">
+            <FormControlFeedback
+                v-slot="{ feedback }"
+                :feedback="feedback">
+                <div
+                    valid
+                    class="valid-feedback">
+                    {{ feedback }}
+                </div>
+            </FormControlFeedback>
+        </slot>
+
+        <slot name="help">
+            <small
+                v-if="helpText"
+                ref="help">
+                {{ helpText }}
+            </small>
+        </slot>
+    </div>
+</template>

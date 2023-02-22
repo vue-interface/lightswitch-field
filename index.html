@@ -11,9 +11,28 @@
             
             <light-switch-field
                 v-model="value"
+                name="test"
                 :on-value="true"
                 :off-value="false"
                 :help-text="`Current Value: ${value}`">
+            </light-switch-field>
+
+            <h2 class="text-2xl mt-6 mb-3">Alternative On/Off Values</h2>
+
+            <light-switch-field
+                v-model="value2"
+                label="Using True/False String"
+                on-value="true"
+                off-value="false"
+                :help-text="`Current Value: ${value2}`">
+            </light-switch-field>
+
+            <light-switch-field
+                v-model="value3"
+                label="Using Numerical String"
+                on-value="1"
+                off-value="0"
+                :help-text="`Current Value: ${value3}`">
             </light-switch-field>
 
             <h2 class="text-2xl mt-6 mb-3">Sizes</h2>
@@ -40,7 +59,9 @@
                 },
                 data() {
                     return {
-                        value: true
+                        value: true,
+                        value2: 'true',
+                        value3: '1'
                     };
                 }
             })
