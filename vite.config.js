@@ -16,10 +16,14 @@ export default defineConfig({
             fileName,
         },
         rollupOptions: {
-            external: ['vue'],
+            external: [
+                '@vue-interface/form-control',
+                'vue',
+            ],
             output: {
                 globals: {
-                    vue: 'Vue'
+                    '@vue-interface/form-control': 'FormControl',
+                    'vue': 'Vue'
                 },
             }
         },
