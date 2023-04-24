@@ -115,7 +115,6 @@ export default defineComponent({
 
 
 <template>
-    {{ isValid }}
     <div :class="formGroupClasses">
         <div
             ref="input"
