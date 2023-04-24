@@ -97,27 +97,29 @@ export default defineComponent({
 
     },
 
-    methods: {
+    // methods: {
 
-        toggle(value?: any) {
-            console.log('toggle', value);
-            // if (value === undefined) {
-            //     value = this.isActive ? this.offValue : this.onValue;
-            // }
+    //     toggle(value?: any) {
+    //         console.log('toggle', value);
+    //         // if (value === undefined) {
+    //         //     value = this.isActive ? this.offValue : this.onValue;
+    //         // }
 
-            // this.currentValue = value;
-        }
+    //         // this.currentValue = value;
+    //     }
 
-    }
+    // }
 
 });
 </script>
 
 
 <template>
+    {{ isValid }}
     <div :class="formGroupClasses">
         <div
             ref="input"
+            class="border-2 border-red-500"
             :class="{
                 ...controlClasses,
                 ['is-valid']: isValid,
@@ -125,14 +127,12 @@ export default defineComponent({
                 ['is-active']: isActive,
                 [String(activeClass)]: isActive,
                 [String(inactiveClass)]: !isActive,
-            }"
-            @keyup.space="$event => toggle()"
-            @keyup.arrow-left="$event => toggle(offValue)"
-            @keyup.arrow-right="$event => toggle(onValue)">
+            }">
             <input
                 :id="id"
                 ref="input"
                 v-model="model"
+                :disabled="controlAttributes.disabled"
                 type="checkbox"
                 class="form-check-input">
             <slot name="label">

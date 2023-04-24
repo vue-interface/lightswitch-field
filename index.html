@@ -46,12 +46,22 @@
             <h2 class="text-2xl mt-6 mb-3">Custom Colors</h2>
 
             <light-switch-field size="md" class="custom-colors"></light-switch-field>
+
+            <h2 class="text-2xl mt-6 mb-3">Disabled</h2>
+
+            <light-switch-field disabled></light-switch-field>
+
+            <h2 class="text-2xl mt-6 mb-3">Errors</h2>
+
+            <light-switch-field name="name" :errors="{name: ['Invalid Name.']}"></light-switch-field>
+
+            <light-switch-field error="This is an error."></light-switch-field>
         </form>
 
         <script type="module">
             import './index.css';
             import { createApp } from 'vue/dist/vue.esm-bundler';
-            import { LightSwitchField } from './index.js';
+            import { LightSwitchField } from './index';
               
             const vue = createApp({
                 components: {
