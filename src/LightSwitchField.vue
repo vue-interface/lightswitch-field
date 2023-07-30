@@ -118,7 +118,6 @@ export default defineComponent({
     <div :class="formGroupClasses">
         <div
             ref="input"
-            class="border-2 border-red-500"
             :class="{
                 ...controlClasses,
                 ['is-valid']: isValid,
