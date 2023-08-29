@@ -21,6 +21,16 @@ export default defineComponent({
         },
 
         /**
+         * The class assigned to the control element when the switch is on.
+         *
+         * @property String
+         */
+        checked: {
+            type: Boolean,
+            default: false
+        },
+
+        /**
          * The class name assigned to the control element
          *
          * @property String
@@ -62,14 +72,6 @@ export default defineComponent({
 
     },
 
-    // data() {
-    //     return {
-    //         currentValue: this.modelValue === this.onValue
-    //             ? this.onValue
-    //             : this.offValue
-    //     };
-    // },
-
     computed: {
         
         model: {
@@ -85,63 +87,40 @@ export default defineComponent({
 
         isActive: function () {
             return this.model === this.onValue;
-        },
-
-        controlSizeClass() {
-            if(this.size === 'md') {
-                return 'form-control';
-            }
-
-            return this.size && `form-control-${this.size}`;
         }
-
     },
 
-    // methods: {
+    methods: {
+        getModelValue(): any {
+            if(this.modelValue === undefined) {
+                return this.currentValue === undefined && this.checked
+                    ? this.onValue
+                    : this.currentValue;
+            }
 
-    //     toggle(value?: any) {
-    //         console.log('toggle', value);
-    //         // if (value === undefined) {
-    //         //     value = this.isActive ? this.offValue : this.onValue;
-    //         // }
-
-    //         // this.currentValue = value;
-    //     }
-
-    // }
+            return this.modelValue;
+        }
+    }
 
 });
 </script>
 
 
 <template>
-    <div :class="formGroupClasses">
-        <div
-            ref="input"
-            :class="{
-                ...controlClasses,
-                ['is-valid']: isValid,
-                ['is-invalid']: isInvalid,
-                ['is-active']: isActive,
-                [String(activeClass)]: isActive,
-                [String(inactiveClass)]: !isActive,
-            }">
+    <div
+        :class="formGroupClasses">
+        <label
+            :for="id"
+            class="form-switch-label">
+            
             <input
-                :id="id"
-                ref="input"
+                ref="field"
                 v-model="model"
-                :disabled="controlAttributes.disabled"
+                v-bind-events
                 type="checkbox"
-                class="form-check-input">
-            <slot name="label">
-                <label
-                    v-if="label"
-                    :for="id"
-                    style="padding-left: .5em">
-                    <slot>{{ label }}</slot>
-                </label>
-            </slot>
-        </div>
+                v-bind="controlAttributes">
+            <slot>{{ label }}</slot>
+        </label>
 
         <slot
             name="errors"
