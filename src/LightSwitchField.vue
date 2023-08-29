@@ -21,11 +21,21 @@ export default defineComponent({
         },
 
         /**
-         * The class assigned to the control element when the switch is on.
+         * Make the element checked.
          *
          * @property String
          */
         checked: {
+            type: Boolean,
+            default: false
+        },
+
+        /**
+         * Make the element readonly.
+         *
+         * @property String
+         */
+        readonly: {
             type: Boolean,
             default: false
         },
@@ -118,7 +128,9 @@ export default defineComponent({
                 v-model="model"
                 v-bind-events
                 type="checkbox"
-                v-bind="controlAttributes">
+                :readonly="readonly"
+                v-bind="controlAttributes"
+                @click="(e) => readonly && e.preventDefault()">
             <slot>{{ label }}</slot>
         </label>
 
