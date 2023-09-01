@@ -1,147 +1,80 @@
-<script lang="ts">
-import { FormControl } from '@vue-interface/form-control';
-import { defineComponent } from 'vue';
+<script setup lang="ts" generic="T, V">
+import type { CheckedFormControlProps, FormControlSlots } from '@vue-interface/form-control';
+import { FormControlErrors, FormControlFeedback, useFormControl } from '@vue-interface/form-control';
+import { computed, ref } from 'vue';
 
-export default defineComponent({
+defineSlots<FormControlSlots<T>>();
 
-    name: 'LightSwitchField',
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: T): void;
+}>();
 
-    extends: FormControl,
+const props = withDefaults(defineProps<CheckedFormControlProps<T, V> & {
+    onValue?: any,
+    offValue?: any
+}>(), {
+    formControlClass: 'form-switch',
+    labelClass: 'form-switch-label',
+    onValue: 1,
+    offValue: 0
+});
 
-    props: {
-
-        /**
-         * The class assigned to the control element when the switch is on.
-         *
-         * @property String
-         */
-        activeClass: {
-            type: String,
-            default: undefined
-        },
-
-        /**
-         * Make the element checked.
-         *
-         * @property String
-         */
-        checked: {
-            type: Boolean,
-            default: false
-        },
-
-        /**
-         * Make the element readonly.
-         *
-         * @property String
-         */
-        readonly: {
-            type: Boolean,
-            default: false
-        },
-
-        /**
-         * The class name assigned to the control element
-         *
-         * @property String
-         */
-        formControlClass: {
-            type: String,
-            default: 'form-switch'
-        },
-
-        /**
-         * The class assigned to the control element when the switch is off.
-         *
-         * @property String
-         */
-        inactiveClass: {
-            type: String,
-            default: undefined
-        },
-
-        /**
-         * The class name assigned to the control element
-         *
-         * @property String
-         */
-        onValue: {
-            type: [String, Number, Boolean, Object, Array],
-            default: 1
-        },
-
-        /**
-         * The class name assigned to the control element
-         *
-         * @property String
-         */
-        offValue: {
-            type: [String, Number, Boolean, Object, Array],
-            default: 0
-        }
-
-    },
-
-    computed: {
-        
-        model: {
-            get() {
-                return this.getModelValue() === this.onValue;
-            },
-            set(value: any) {
-                this.setModelValue(
-                    value === true ? this.onValue : this.offValue
-                );
-            }
-        },
-
-        isActive: function () {
-            return this.model === this.onValue;
-        }
-    },
-
-    methods: {
-        getModelValue(): any {
-            if(this.modelValue === undefined) {
-                return this.currentValue === undefined && this.checked
-                    ? this.onValue
-                    : this.currentValue;
-            }
-
-            return this.modelValue;
-        }
+function getModelValue(): T {
+    if(props.modelValue === undefined) {
+        return props.checked
+            ? props.onValue
+            : props.offValue;
     }
 
-});
-</script>
+    return props.modelValue;
+}
 
+const model = computed({
+    get: () => {
+        return getModelValue() === props.onValue;
+    },
+    set(value) {
+        emit('update:modelValue', value === true ? props.onValue : props.offValue);
+    }
+});
+
+const {
+    controlAttributes,
+    formGroupClasses,
+    onClick,
+    onBlur,
+    onFocus
+} = useFormControl(props, emit, model);
+
+const field = ref<HTMLTextAreaElement>();
+</script>
 
 <template>
     <div
+        class="light-switch-field"
         :class="formGroupClasses">
         <label
-            :for="id"
-            class="form-switch-label">
-            
+            :for="controlAttributes.id"
+            :class="labelClass">            
             <input
                 ref="field"
                 v-model="model"
-                v-bind-events
                 type="checkbox"
-                :readonly="readonly"
                 v-bind="controlAttributes"
-                @click="(e) => readonly && e.preventDefault()">
+                @click="onClick"
+                @blur="onBlur"
+                @focus="onFocus">
             <slot>{{ label }}</slot>
         </label>
 
         <slot
             name="errors"
-            v-bind="{ error, errors, id: $attrs.id, name: $attrs.name }">        
+            v-bind="{ error, errors, id, name }">        
             <FormControlErrors
                 v-if="!!(error || errors)"
-                :id="$attrs.id"
+                :id="id"
                 v-slot="{ error }"
-                :name="$attrs.name"
+                :name="name"
                 :error="error"
                 :errors="errors">
                 <div
