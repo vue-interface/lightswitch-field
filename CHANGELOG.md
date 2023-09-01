@@ -1,3 +1,16 @@
+# [2.0.0-beta.8](https://github.com/vue-interface/light-switch-field/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2023-09-01)
+
+
+### Bug Fixes
+
+* ts implementation ([1e87bbe](https://github.com/vue-interface/light-switch-field/commit/1e87bbe815e9bae32c073632da580f5a622ea9d8))
+* updated minimum dep ([3a44c14](https://github.com/vue-interface/light-switch-field/commit/3a44c14b8795703cf962d35f398bf68646a3f43e))
+
+
+### Features
+
+* implemented new form control composable ([66c6e14](https://github.com/vue-interface/light-switch-field/commit/66c6e149655e5679ee92af6804c97ac740b306c1))
+
 # [2.0.0-beta.7](https://github.com/vue-interface/light-switch-field/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2023-08-29)
 
 
