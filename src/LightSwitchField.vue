@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="T, V">
+<script setup lang="ts" generic="T, V, OnValue">
 import type { CheckedFormControlProps, FormControlSlots } from '@vue-interface/form-control';
 import { FormControlErrors, FormControlFeedback, useFormControl } from '@vue-interface/form-control';
 import { computed, ref } from 'vue';
@@ -9,14 +9,19 @@ const emit = defineEmits<{
     (e: 'update:modelValue', value: T): void;
 }>();
 
+// The TS implementation here is kinda weak. v-model should be the same as the
+// onValue and offValue props. The issue is that we need to cast as `any` or
+// else we get the following TS error:
+// `Type 'T' is not assignable to type 'InferDefault<FormControlProps<T, V> & {
+// checked?: boolean; } & { onValue?: T; offValue?: T; }, T>'`.
 const props = withDefaults(defineProps<CheckedFormControlProps<T, V> & {
-    onValue?: any,
-    offValue?: any
+    onValue?: T,
+    offValue?: T
 }>(), {
     formControlClass: 'form-switch',
     labelClass: 'form-switch-label',
-    onValue: 1,
-    offValue: 0
+    onValue: 1 as any,
+    offValue: 0 as any
 });
 
 function getModelValue(): T {
@@ -31,10 +36,19 @@ function getModelValue(): T {
 
 const model = computed({
     get: () => {
-        return getModelValue() === props.onValue;
+        return getModelValue();
     },
     set(value) {
-        emit('update:modelValue', value === true ? props.onValue : props.offValue);
+        emit('update:modelValue', value);
+    }
+});
+
+const checked = computed({
+    get() {
+        return model.value === props.onValue;
+    },
+    set(value) {
+        model.value = value === true ? props.onValue : props.offValue;
     }
 });
 
@@ -58,7 +72,7 @@ const field = ref<HTMLTextAreaElement>();
             :class="labelClass">            
             <input
                 ref="field"
-                v-model="model"
+                v-model="checked"
                 type="checkbox"
                 v-bind="controlAttributes"
                 @click="onClick"
