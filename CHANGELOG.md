@@ -1,3 +1,11 @@
+# [2.0.0-beta.9](https://github.com/vue-interface/light-switch-field/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2023-09-26)
+
+
+### Bug Fixes
+
+* issue with new form-control ([92c8361](https://github.com/vue-interface/light-switch-field/commit/92c8361de48a4d7dd5ed85479328268523609922))
+* updated to latest form-control ([6e3a660](https://github.com/vue-interface/light-switch-field/commit/6e3a660b00e357425ebaf967f9266917dac7ee6e))
+
 # [2.0.0-beta.8](https://github.com/vue-interface/light-switch-field/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2023-09-01)
 
 
