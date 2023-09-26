@@ -1,3 +1,10 @@
+# [2.0.0-beta.10](https://github.com/vue-interface/light-switch-field/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2023-09-26)
+
+
+### Bug Fixes
+
+* updated tsconfig ([a53ecef](https://github.com/vue-interface/light-switch-field/commit/a53ecef32ac1e2aae7a15d78539ebb36da856013))
+
 # [2.0.0-beta.9](https://github.com/vue-interface/light-switch-field/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2023-09-26)
 
 
