@@ -1,13 +1,11 @@
 <script setup lang="ts" generic="T, V, OnValue">
 import type { CheckedFormControlProps, FormControlSlots } from '@vue-interface/form-control';
-import { FormControlErrors, FormControlFeedback, useFormControl } from '@vue-interface/form-control';
+import { FormControlErrors, FormControlEvents, FormControlFeedback, useFormControl } from '@vue-interface/form-control';
 import { computed, ref } from 'vue';
 
 defineSlots<FormControlSlots<T>>();
 
-const emit = defineEmits<{
-    (e: 'update:modelValue', value: T): void;
-}>();
+const emit = defineEmits<FormControlEvents<T>>();
 
 // The TS implementation here is kinda weak. v-model should be the same as the
 // onValue and offValue props. The issue is that we need to cast as `any` or
