@@ -1,3 +1,10 @@
+# [2.0.0-beta.11](https://github.com/vue-interface/light-switch-field/compare/v2.0.0-beta.10...v2.0.0-beta.11) (2024-06-12)
+
+
+### Bug Fixes
+
+* fix issue with emits ([04c2770](https://github.com/vue-interface/light-switch-field/commit/04c2770cc85fef24d5bb5fee285d15f0d0e78ee7))
+
 # [2.0.0-beta.10](https://github.com/vue-interface/light-switch-field/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2023-09-26)
 
 
